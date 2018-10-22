@@ -50,8 +50,8 @@ module "example" {
 
 ## Conditional creation
 
-This moudle can create both Autoscaling group(ASG) and Autoscaling configuration(ASC), it 
-is possible to use external scalinggroup only if you specify `scaling_group_id` parameter.
+This moudle can create both Auto Scaling group(ASG) and Auto Scaling configuration(ASC), it 
+is possible to use external scaling group only if you specify `scaling_group_id` parameter.
 
 ## Inputs
 
