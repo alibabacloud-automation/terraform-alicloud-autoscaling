@@ -99,12 +99,10 @@ is possible to use external scalinggroup only if you specify `scaling_group_id` 
 
 ## Authors
 ----
-
 Created and maintained by Tong Kangning(@TalentNing, xiaoxiaoerke@163.com)
 
 ## License
 ----
-
 Apache 2 Licensed. See LICENSE for full details.
 
 Reference
