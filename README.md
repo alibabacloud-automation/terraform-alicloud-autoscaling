@@ -97,11 +97,11 @@ is possible to use external scalinggroup only if you specify `scaling_group_id` 
 | this_autoscaling_group_max_size  | The minimum size of the autoscaling group  |
 | this_autoscaling_group_default_cooldown  | The amount of time (in seconds),after a scaling activity completes before another scaling activity can start  |
 
-## Authors
+Authors
 ----
 Created and maintained by Tong Kangning(@TalentNing, xiaoxiaoerke@163.com)
 
-## License
+License
 ----
 Apache 2 Licensed. See LICENSE for full details.
 
