@@ -1,13 +1,13 @@
-Alicloud AutoScaling Terraform Module  
+Alicloud Auto Scaling Terraform Module  
 terraform-alicloud-autoscaling
 ---
 
-Terraform moudle which create Autoscaling resource on Alicloud.
+Terraform moudle which create Auto Scaling resource on Alicloud.
 
 These types of resources are supported:
 
-* [Autoscaling Group](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_group.html)
-* [Autoscaling Configuration](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html)
+* [Auto Scaling Group](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_group.html)
+* [Auto Scaling Configuration](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html)
 
 ## Usage
 
