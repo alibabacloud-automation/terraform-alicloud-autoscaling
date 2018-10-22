@@ -1,5 +1,4 @@
-# Alicloud AutoScaling Terraform Module
-
+Alicloud AutoScaling Terraform Module  
 terraform-alicloud-autoscaling
 ---
 
@@ -108,6 +107,8 @@ Created and maintained by Tong Kangning(@TalentNing, xiaoxiaoerke@163.com)
 
 Apache 2 Licensed. See LICENSE for full details.
 
+Reference
+---------
 * [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)
 * [Terraform-Provider-Alicloud Docs](https://www.terraform.io/docs/providers/alicloud/index.html)
