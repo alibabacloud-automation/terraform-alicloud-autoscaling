@@ -12,7 +12,7 @@ data "alicloud_images" "ecs_image" {
 }
 
 data "alicloud_instance_types" "default" {
-  availability_zone = "${data.alicloud_zones.default.zones.0.id}"
+  availability_zone = data.alicloud_zones.default.zones[0].id
   cpu_core_count    = 1
   memory_size       = 2
 }
@@ -27,8 +27,8 @@ module "example" {
   max_size         = 1
 
   // Autoscaling Configuration
-  image_id                   = "${data.alicloud_images.ecs_image.images.0.id}"
-  instance_type              = "${data.alicloud_instance_types.default.instance_types.0.id}"
+  image_id                   = data.alicloud_images.ecs_image.images[0].id
+  instance_type              = data.alicloud_instance_types.default.instance_types[0].id
   security_group_id          = "sg-2ze6wjtl1123456"
   scaling_configuration_name = "testAccEssScalingConfiguration"
   internet_max_bandwidth_out = "1"
@@ -41,10 +41,7 @@ module "example" {
 
   force_delete = "true"
 
-  data_disk = [
-    {
-      size     = 20
-      category = "cloud_efficiency"
-    },
-  ]
+  data_disk_size     = 20
+  data_disk_category = "cloud_efficiency"
 }
+
