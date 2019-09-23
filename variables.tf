@@ -1,4 +1,9 @@
 //Autoscaling group
+variable "region" {
+  description = "The region used to launch this module resources."
+  default     = ""
+}
+
 variable "scaling_group_id" {
   description = "Specifying existing autoscaling group ID"
   default     = ""
@@ -24,7 +29,7 @@ variable "default_cooldown" {
 
 variable "vswitch_ids" {
   description = "List of virtual switch IDs in which the ecs instances to be launched"
-  type        = "list"
+  type        = list(string)
 
   default = [
     "",
@@ -33,7 +38,7 @@ variable "vswitch_ids" {
 
 variable "removal_policies" {
   description = "RemovalPolicy is used to select the ECS instances you want to remove from the scaling group when multiple candidates for removal exist"
-  type        = "list"
+  type        = list(string)
 
   default = [
     "OldestScalingConfiguration",
@@ -43,7 +48,7 @@ variable "removal_policies" {
 
 variable "db_instance_ids" {
   description = "A list of rds instance ids to add to the autoscaling group"
-  type        = "list"
+  type        = list(string)
 
   default = [
     "",
@@ -52,7 +57,7 @@ variable "db_instance_ids" {
 
 variable "loadbalancer_ids" {
   description = "A list of loadbalancer ids to add to the autoscaling group"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -128,14 +133,21 @@ variable "force_delete" {
   default     = false
 }
 
-variable "data_disk" {
-  description = "DataDisk mappings to attach to ecs instance"
-  type        = "list"
-  default     = []
+variable "data_disk_size" {
+  description = "DataDisk size to attach to ecs instance"
+  type        = string
+  default     = "20"
+}
+
+variable "data_disk_category" {
+  description = "DataDisk category to attach to ecs instance"
+  type        = string
+  default     = "cloud_efficiency"
 }
 
 variable "tags" {
   description = "A mapping of tags to assign to the resource"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
+
