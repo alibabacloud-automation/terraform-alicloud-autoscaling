@@ -5,3 +5,5 @@ terraform.tfstate.backup
 crash.log
 terraform.tfstate
 terraform.tfstate.backup
+*.bak
+terraform.log

@@ -14,6 +14,7 @@ These types of resources are supported:
 ```hcl
 module "example" {
   source = "terraform-alicloud-modules/autoscaling/alicloud"
+  profile = "default"
   // Autoscaling Group
   scaling_group_name = "testAccEssScalingGroup"
   min_size           = 0
@@ -57,6 +58,9 @@ is possible to use external scaling group only if you specify `scaling_group_id`
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| profile  | The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable. | string  | ''  | no  |
+| shared_credentials_file  | This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used. | string  | ''  | no  |
+| skip_region_validation  | Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet). | bool  | false | no  |
 | scaling_group_id  | Specifying existing autoscaling group ID  | string  | ''  | no  |
 | scaling_group_name  | The name for autoscaling group  | string  | ''  | no  |
 | min_size  | Minimum number of ECS instances in the scaling group  | string  | -  | yes  |
