@@ -2,7 +2,7 @@ Alicloud Auto Scaling Terraform Module
 terraform-alicloud-autoscaling
 ---
 
-Terraform moudle which create Auto Scaling resource on Alicloud.
+Terraform moudle which create Auto Scaling resources on Alicloud.
 
 These types of resources are supported:
 
@@ -33,7 +33,7 @@ module "example" {
     tag1 = "tag_value1"
     tag2 = "tag_value2"
   }
-  force_delete = "true"
+  force_delete = true
   data_disks = [{
     size     = 20
     category = "cloud_ssd"
@@ -45,6 +45,10 @@ module "example" {
   }]
 }
 ```
+**NOTE:** This module using AccessKey and SecretKey are from `profile` and `shared_credentials_file`.
+If you have not set them yet, please install [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) and configure it.
+
+**NOTE:** If one scaling group has only one scaling configuration, them can be deleted when `force_delete = true`.
 
 ## Conditional creation
 
@@ -107,10 +111,10 @@ scaling_group_id = "existing-scaling-group-id"
 | image_id  | The Ecs image ID to launch  | string  | -  | yes  |
 | image_owners  | The image owner used to retrieve ECS images | string  | "system" | yes  |
 | image_name_regex  | The name regex used to retrieve ECS images  | string  | "^ubuntu_18.*_64" | yes  |
-| instance_type  | Resource type of an ECS instance. If not set, it can be retrieved by `cpu_core_count` and `memory_size`  | string  | -  | no  |
+| instance_type  | Resource type of an ECS instance. If not set, it can be retrieved by `cpu_core_count` and `memory_size`  | string  | "" | no  |
 | cpu_core_count  | CPU core count used to fetch instance types | int  | 2  | no  |
 | memory_size  | Memory size used to fetch instance types  | int  | 4 | no  |
-| instance_name  | Name of an ECS instance. Default to a random string prefixed with `terraform-ess-instance-` | string  |  - | no  |
+| instance_name  | Name of an ECS instance. Default to a random string prefixed with `terraform-ess-instance-` | string  | "" | no  |
 | scaling_configuration_name  | Name for the autoscaling configuration. Default to a random string prefixed with `terraform-ess-configuration-` | string  | ''  | no |
 | internet_charge_type  | The ECS instance network billing type: PayByTraffic or PayByBandwidth. | string  | 'PayByTraffic' | no  |
 | internet_max_bandwidth_in  | Maximum incoming bandwidth from the public network  | string  | 200  | no  |
