@@ -33,3 +33,23 @@ output "this_autoscaling_group_default_cooldown" {
   value       = concat(alicloud_ess_scaling_group.this.*.default_cooldown, [""])[0]
 }
 
+output "this_autoscaling_group_load_balancers" {
+  description = "The load balancer ids associated with the autoscaling group"
+  value       = concat(alicloud_ess_scaling_group.this.*.loadbalancer_ids, [""])[0]
+}
+output "this_autoscaling_group_rds_instance_ids" {
+  description = "The rds instance ids associated with the autoscaling group"
+  value       = concat(alicloud_ess_scaling_group.this.*.db_instance_ids, [""])[0]
+}
+output "this_autoscaling_group_vswitch_ids" {
+  description = "The vswitch ids associated with the autoscaling group"
+  value       = concat(alicloud_ess_scaling_group.this.*.vswitch_ids, [""])[0]
+}
+output "this_autoscaling_group_sg_ids" {
+  description = "The security group ids associated with the autoscaling group"
+  value       = concat(alicloud_ess_scaling_configuration.this.*.security_group_ids, [""])[0]
+}
+output "this_autoscaling_group_instance_ids" {
+  description = "The ECS instance ids associated with the autoscaling group"
+  value       = concat(alicloud_ess_scaling_configuration.this.*.instance_ids, [""])[0]
+}
