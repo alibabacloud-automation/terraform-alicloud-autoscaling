@@ -164,6 +164,7 @@ variable "security_group_ids" {
 
 variable "instance_name" {
   description = "Name of an ECS instance. Default to a random string prefixed with `terraform-ess-instance-`."
+  default     = ""
 }
 
 variable "scaling_configuration_name" {
