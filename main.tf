@@ -23,9 +23,9 @@ resource "alicloud_ess_scaling_group" "this" {
 
 // Autoscaling configuration
 resource "alicloud_ess_scaling_configuration" "this" {
-  scaling_group_id           = var.scaling_group_id == "" ? join("", alicloud_ess_scaling_group.this.*.id) : var.scaling_group_id
+  scaling_group_id           = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this.0.id : var.scaling_group_id
   image_id                   = var.image_id != "" ? var.image_id : data.alicloud_images.this.ids.0
-  instance_types             = var.instance_type != "" ? [var.instance_type] : [data.alicloud_instance_types.this.ids.0]
+  instance_types             = length(var.instance_types) > 0 ? var.instance_types : var.instance_type != "" ? [var.instance_type] : [data.alicloud_instance_types.this.ids.0]
   security_group_ids         = local.security_group_ids
   instance_name              = local.scaling_instance_name
   scaling_configuration_name = local.scaling_configuration_name
