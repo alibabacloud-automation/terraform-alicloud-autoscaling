@@ -148,8 +148,14 @@ variable "loadbalancer_ids" {
 
 # Autoscaling configuration
 variable "instance_type" {
-  description = "Resource type of an ECS instance. If not set, it can be retrieved automatically by specifying `cpu_core_count` and `memory_size`."
+  description = "(Deprecated) It has been deprecated from 1.4.0 and use `instance_types` instead."
   default     = ""
+}
+
+variable "instance_types" {
+  description = "A list of ECS instance types. If not set, one will be returned automatically by specifying `cpu_core_count` and `memory_size`. If it is set, `instance_type` will be ignored."
+  type        = "list"
+  default     = []
 }
 
 variable "security_group_id" {

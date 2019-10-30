@@ -37,6 +37,10 @@ output "this_autoscaling_group_load_balancers" {
   description = "The load balancer ids associated with the autoscaling group"
   value       = concat(alicloud_ess_scaling_group.this.*.loadbalancer_ids, [""])[0]
 }
+output "this_autoscaling_group_slb_ids" {
+  description = "Same with `this_autoscaling_group_load_balancers`"
+  value       = concat(alicloud_ess_scaling_group.this.*.loadbalancer_ids, [""])[0]
+}
 output "this_autoscaling_group_rds_instance_ids" {
   description = "The rds instance ids associated with the autoscaling group"
   value       = concat(alicloud_ess_scaling_group.this.*.db_instance_ids, [""])[0]

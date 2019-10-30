@@ -111,7 +111,8 @@ scaling_group_id = "existing-scaling-group-id"
 | image_id  | The Ecs image ID to launch  | string  | -  | yes  |
 | image_owners  | The image owner used to retrieve ECS images | string  | "system" | yes  |
 | image_name_regex  | The name regex used to retrieve ECS images  | string  | "^ubuntu_18.*_64" | yes  |
-| instance_type  | Resource type of an ECS instance. If not set, it can be retrieved by `cpu_core_count` and `memory_size`  | string  | "" | no  |
+| instance_type  | (Deprecated) It has been deprecated from 1.4.0 and use `instance_types` instead  | string  | "" | no  |
+| instance_types  | A list of ECS instance types. If not set, one will be returned automatically by specifying `cpu_core_count` and `memory_size`. If it is set, `instance_type` will be ignored  | list | [] | no  |
 | cpu_core_count  | CPU core count used to fetch instance types | int  | 2  | no  |
 | memory_size  | Memory size used to fetch instance types  | int  | 4 | no  |
 | instance_name  | Name of an ECS instance. Default to a random string prefixed with `terraform-ess-instance-` | string  | "" | no  |
@@ -158,6 +159,7 @@ scaling_group_id = "existing-scaling-group-id"
 | this_autoscaling_group_max_size  | The minimum size of the autoscaling group  |
 | this_autoscaling_group_default_cooldown  | The amount of time (in seconds),after a scaling activity completes before another scaling activity can start |
 | this_autoscaling_group_load_balancers | The load balancer ids associated with the autoscaling group |
+| this_autoscaling_group_slb_ids | Same with `this_autoscaling_group_load_balancers` |
 | this_autoscaling_group_rds_instance_ids | The rds instance ids associated with the autoscaling group |
 |this_autoscaling_group_vswitch_ids | The vswitch ids associated with the autoscaling group |
 | this_autoscaling_group_sg_ids | The security group ids associated with the autoscaling group |

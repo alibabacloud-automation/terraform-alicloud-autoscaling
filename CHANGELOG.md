@@ -1,4 +1,9 @@
 ## 1.4.0 (Unreleased)
+
+IMPROVEMENTS:
+
+- add new filed instance_types and this_autoscaling_group_slb_ids
+
 ## 1.3.0 (October 30, 2019)
 
 IMPROVEMENTS:
