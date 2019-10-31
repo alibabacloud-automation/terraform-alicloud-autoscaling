@@ -1,7 +1,9 @@
-## 1.4.0 (Unreleased)
+## 1.5.0 (Unreleased)
+## 1.4.0 (October 31, 2019)
 
 IMPROVEMENTS:
 
+- support to add lifecycle hook
 - add new filed instance_types and this_autoscaling_group_slb_ids
 
 ## 1.3.0 (October 30, 2019)
