@@ -157,7 +157,11 @@ variable "instance_types" {
   type        = "list"
   default     = []
 }
-
+variable "create_scaling_configuration" {
+  description = "Whether to create a new scaling configuraion."
+  type        = bool
+  default     = true
+}
 variable "security_group_id" {
   description = "(Deprecated) It is deprecated from 1.3.0 and used new parameter security_group_ids instead."
   default     = ""
@@ -189,10 +193,15 @@ variable "internet_max_bandwidth_in" {
 }
 
 variable "internet_max_bandwidth_out" {
-  description = "Maximum outgoing bandwidth from the public network"
+  description = "Maximum outgoing bandwidth from the public network. It will be ignored when `associate_public_ip_address` is false."
   default     = 0
 }
 
+variable "associate_public_ip_address" {
+  description = "Whether to associate a public ip address with an instance in a VPC."
+  type        = bool
+  default     = false
+}
 variable "system_disk_category" {
   description = "Category of the system disk"
   default     = "cloud_efficiency"
@@ -230,6 +239,7 @@ variable "role_name" {
 
 variable "force_delete" {
   description = "The last scaling configuration will be deleted forcibly with deleting its scaling group"
+  type        = bool
   default     = false
 }
 
@@ -255,4 +265,39 @@ variable "tags" {
   description = "A mapping of tags used to create a new scaling configuration."
   type        = map(string)
   default     = {}
+}
+
+// lifecycle hook
+variable "create_lifecycle_hook" {
+  description = "Whether to create lifecycle hook for this scaling group"
+  type        = bool
+  default     = false
+}
+variable "lifecycle_hook_name" {
+  description = "The name for lifecyle hook. Default to a random string prefixed with `terraform-ess-hook-`."
+  default     = ""
+}
+variable "lifecycle_transition" {
+  description = "Type of Scaling activity attached to lifecycle hook. Supported value: SCALE_OUT, SCALE_IN."
+  default     = "SCALE_IN"
+}
+variable "heartbeat_timeout" {
+  description = "Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the default_result parameter."
+  default     = 600
+}
+variable "hook_action_policy" {
+  description = "Defines the action which scaling group should take when the lifecycle hook timeout elapses. Valid value: CONTINUE, ABANDON."
+  default     = "CONTINUE"
+}
+variable "mns_topic_name" {
+  description = "Specify a MNS topic to send notification"
+  default     = ""
+}
+variable "mns_queue_name" {
+  description = "Specify a MNS queue to send notification. It will be ignored when `mns_topic_name` is set."
+  default     = ""
+}
+variable "notification_metadata" {
+  description = "Additional information that you want to include when Auto Scaling sends a message to the notification target."
+  default     = ""
 }

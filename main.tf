@@ -23,7 +23,8 @@ resource "alicloud_ess_scaling_group" "this" {
 
 // Autoscaling configuration
 resource "alicloud_ess_scaling_configuration" "this" {
-  scaling_group_id           = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this.0.id : var.scaling_group_id
+  count                      = var.create_scaling_configuration ? 1 : 0
+  scaling_group_id           = local.scaling_group_id
   image_id                   = var.image_id != "" ? var.image_id : data.alicloud_images.this.ids.0
   instance_types             = length(var.instance_types) > 0 ? var.instance_types : var.instance_type != "" ? [var.instance_type] : [data.alicloud_instance_types.this.ids.0]
   security_group_ids         = local.security_group_ids
@@ -31,7 +32,7 @@ resource "alicloud_ess_scaling_configuration" "this" {
   scaling_configuration_name = local.scaling_configuration_name
   internet_charge_type       = var.internet_charge_type
   internet_max_bandwidth_in  = var.internet_max_bandwidth_in
-  internet_max_bandwidth_out = var.internet_max_bandwidth_out
+  internet_max_bandwidth_out = var.associate_public_ip_address ? var.internet_max_bandwidth_out : 0
   system_disk_category       = var.system_disk_category
   system_disk_size           = var.system_disk_size
   enable                     = var.enable
@@ -50,4 +51,15 @@ resource "alicloud_ess_scaling_configuration" "this" {
       category             = lookup(data_disk.value, "category", null)
     }
   }
+}
+
+resource "alicloud_ess_lifecycle_hook" "this" {
+  count                 = var.create_lifecycle_hook ? 1 : 0
+  scaling_group_id      = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this.0.id : var.scaling_group_id
+  name                  = local.lifecycle_hook_name
+  lifecycle_transition  = var.lifecycle_transition
+  heartbeat_timeout     = var.heartbeat_timeout
+  default_result        = var.hook_action_policy
+  notification_arn      = local.notification_arn
+  notification_metadata = var.notification_metadata
 }
