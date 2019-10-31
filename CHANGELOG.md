@@ -3,6 +3,7 @@
 
 IMPROVEMENTS:
 
+- support associate_public_ip_address
 - support to add lifecycle hook
 - add new filed instance_types and this_autoscaling_group_slb_ids
 
