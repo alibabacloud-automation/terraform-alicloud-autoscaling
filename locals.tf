@@ -44,7 +44,6 @@ data "alicloud_vswitches" "this" {
   ids         = var.vswitch_ids
   name_regex  = local.vswitch_name_regex
   tags        = local.vswitch_tags
-  output_file = "vsw.json"
 }
 
 data "alicloud_zones" "this" {
