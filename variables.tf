@@ -53,11 +53,11 @@ variable "rds_name_regex" {
   default     = ""
 }
 
-//variable "rds_tags" {
-//  description = "A default filter applied to retrieve existing rds instances by tags. If not set, `filter_with_tags` will be used."
-//  type        = map(string)
-//  default     = {}
-//}
+variable "rds_tags" {
+  description = "A default filter applied to retrieve existing rds instances by tags. If not set, `filter_with_tags` will be used."
+  type        = map(string)
+  default     = {}
+}
 variable "sg_name_regex" {
   description = "A default filter applied to retrieve existing security groups by name regex. If not set, `filter_with_name_regex` will be used."
   default     = ""
@@ -260,7 +260,24 @@ variable "data_disks" {
   type        = list(map(string))
   default     = []
 }
-
+variable "password_inherit" {
+  description = "Specifies whether to use the password that is predefined in the image. If true, the `password` and `kms_encrypted_password` will be ignored. You must ensure that the selected image has a password configured."
+  type        = bool
+  default     = false
+}
+variable "password" {
+  description = "The password of the ECS instance. It is valid when `password_inherit` is false"
+  default     = ""
+}
+variable "kms_encrypted_password" {
+  description = "An KMS encrypts password used to a db account. If `password_inherit` and `password` is set, this field will be ignored."
+  default     = ""
+}
+variable "kms_encryption_context" {
+  description = "An KMS encryption context used to decrypt `kms_encrypted_password` before creating ECS instance. See Encryption Context: https://www.alibabacloud.com/help/doc-detail/42975.htm. It is valid when kms_encrypted_password is set."
+  type        = map(string)
+  default     = {}
+}
 variable "tags" {
   description = "A mapping of tags used to create a new scaling configuration."
   type        = map(string)
