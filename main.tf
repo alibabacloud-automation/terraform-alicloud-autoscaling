@@ -1,6 +1,6 @@
 // Profile configure
 provider "alicloud" {
-  version                 = ">=1.56.0"
+  //  version                 = ">=1.62.0"
   profile                 = var.profile != "" ? var.profile : null
   shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
   region                  = var.region != "" ? var.region : null
@@ -41,6 +41,10 @@ resource "alicloud_ess_scaling_configuration" "this" {
   key_name                   = var.key_name
   role_name                  = var.role_name
   force_delete               = var.force_delete
+  password_inherit           = var.password_inherit
+  password                   = var.password_inherit == true ? "" : var.password
+  kms_encrypted_password     = local.kms_encrypted_password
+  kms_encryption_context     = local.kms_encrypted_password == "" ? null : length(var.kms_encryption_context) > 0 ? var.kms_encryption_context : null
   tags                       = var.tags
   dynamic "data_disk" {
     for_each = var.data_disks
