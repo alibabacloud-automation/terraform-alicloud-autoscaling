@@ -2,7 +2,8 @@
 
 IMPROVEMENTS:
 
-- add new filed rds_tags and password setting [GH-9](https://github.com/terraform-alicloud-modules/terraform-alicloud-autoscaling/pull/9)
+- add new fileds to support multi_az, on_demond and spot configure [GH-10](https://github.com/terraform-alicloud-modules/terraform-alicloud-autoscaling/pull/10)
+- add new fileds rds_tags and password setting [GH-9](https://github.com/terraform-alicloud-modules/terraform-alicloud-autoscaling/pull/9)
 - improve(autoscaling): remove output file of datasource [GH-8](https://github.com/terraform-alicloud-modules/terraform-alicloud-autoscaling/pull/8)
 
 ## 1.4.0 (October 31, 2019)

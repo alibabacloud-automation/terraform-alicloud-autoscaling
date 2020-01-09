@@ -80,7 +80,7 @@ variable "image_owners" {
 }
 variable "image_name_regex" {
   description = "The name regex used to retrieve ECS images."
-  default     = "^ubuntu_18.*_64"
+  default     = "^ubuntu_18.*64"
 }
 
 # Instance typs variables
@@ -144,6 +144,32 @@ variable "loadbalancer_ids" {
   description = "A list of loadbalancer ids to add to the autoscaling group. If not set, it can be retrieved automatically by specifying filter `slb_name_regex` or `slb_tags`."
   type        = list(string)
   default     = []
+}
+
+variable "multi_az_policy" {
+  description = "Multi-AZ scaling group ECS instance expansion and contraction strategy. PRIORITY, BALANCE or COST_OPTIMIZED"
+  type        = string
+  default     = null
+}
+variable "on_demand_base_capacity" {
+  description = "The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances. This base portion is provisioned first as your group scales."
+  type        = number
+  default     = null
+}
+variable "on_demand_percentage_above_base_capacity" {
+  description = "Controls the percentages of On-Demand Instances and Spot Instances for your additional capacity beyond OnDemandBaseCapacity."
+  type        = number
+  default     = null
+}
+variable "spot_instance_pools" {
+  description = "The number of Spot pools to use to allocate your Spot capacity. The Spot pools is composed of instance types of lowest price."
+  type        = number
+  default     = null
+}
+variable "spot_instance_remedy" {
+  description = "Whether to replace spot instances with newly created spot/onDemand instance when receive a spot recycling message."
+  type        = bool
+  default     = null
 }
 
 # Autoscaling configuration

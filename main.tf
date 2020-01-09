@@ -10,15 +10,20 @@ provider "alicloud" {
 
 // Autoscaling Group
 resource "alicloud_ess_scaling_group" "this" {
-  count              = var.scaling_group_id == "" ? 1 : 0
-  scaling_group_name = local.scaling_group_name
-  max_size           = var.max_size
-  min_size           = var.min_size
-  default_cooldown   = var.default_cooldown
-  vswitch_ids        = local.vswitch_ids
-  removal_policies   = var.removal_policies
-  db_instance_ids    = local.rds_instance_ids
-  loadbalancer_ids   = local.slb_instance_ids
+  count                                    = var.scaling_group_id == "" ? 1 : 0
+  scaling_group_name                       = local.scaling_group_name
+  max_size                                 = var.max_size
+  min_size                                 = var.min_size
+  default_cooldown                         = var.default_cooldown
+  vswitch_ids                              = local.vswitch_ids
+  removal_policies                         = var.removal_policies
+  db_instance_ids                          = local.rds_instance_ids
+  loadbalancer_ids                         = local.slb_instance_ids
+  multi_az_policy                          = var.multi_az_policy
+  on_demand_base_capacity                  = var.on_demand_base_capacity
+  on_demand_percentage_above_base_capacity = var.on_demand_percentage_above_base_capacity
+  spot_instance_pools                      = var.spot_instance_pools
+  spot_instance_remedy                     = var.spot_instance_remedy
 }
 
 // Autoscaling configuration
