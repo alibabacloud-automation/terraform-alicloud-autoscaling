@@ -1,6 +1,5 @@
 // Profile configure
 provider "alicloud" {
-  //  version                 = ">=1.62.0"
   profile                 = var.profile != "" ? var.profile : null
   shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
   region                  = var.region != "" ? var.region : null
