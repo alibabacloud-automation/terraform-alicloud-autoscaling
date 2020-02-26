@@ -1,20 +1,19 @@
-Alicloud Auto Scaling Terraform Module  
-terraform-alicloud-autoscaling
----
+ terraform-alicloud-autoscaling
+-------------------------------
 
-Terraform moudle which create Auto Scaling resources on Alicloud.
+Terraform模块用于在阿里云上创建自动缩放资源。
 
-These types of resources are supported:
+支持以下类型的资源：
 
 * [Auto Scaling Group](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_group.html)
 * [Auto Scaling Configuration](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html)
 * [Auto Scaling Lifecycle Hook](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_lifecycle_hook.html)
 
-## Terraform versions
+## Terraform 版本
 
-The Module requires Terraform 0.12 and Terraform Provider AliCloud 1.62.0+.
+本 Module 要求使用 Terraform 0.12 和 阿里云 Provider 1.62.0+。
 
-## Usage
+## 用法
 
 ```hcl
 module "example" {
@@ -51,16 +50,16 @@ module "example" {
   }]
 }
 ```
-**NOTE:** This module using AccessKey and SecretKey are from `profile` and `shared_credentials_file`.
-If you have not set them yet, please install [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) and configure it.
 
-**NOTE:** If one scaling group has only one scaling configuration, them can be deleted when `force_delete = true`.
+## 注意事项
 
-## Conditional creation
+* 本 Module 使用的 AccessKey 和 SecretKey 可以直接从 `profile` 和 `shared_credentials_file` 中获取。如果未设置，可通过下载安装 [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) 后进行配置。
 
-This moudle can create both Auto Scaling group(ASG) and Auto Scaling configuration(ASC), it 
-is possible to use external scaling group only if you specify `scaling_group_id` parameter or
-use filter to get othere resources like security groups, load balancers and son on automatically.
+* 如果一个缩放组只有一个缩放配置，则可以在 `force_delete = true` 时删除。
+
+## 条件创建
+
+这个模型可以创建自动缩放组 (ASG) 和自动缩放配置 (ASC)，它仅当您指定 'scaling_group_id' 参数或使用过滤器自动获取安全组、负载平衡器等其他资源。
 
 1. To create ASC, but not ASG:
 ```hcl
@@ -112,7 +111,7 @@ scaling_group_id = "existing-scaling-group-id"
   mns_topic_name = alicloud_mns_topic.this.id
 ```
 
-## Inputs
+## 入参
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
@@ -175,7 +174,7 @@ scaling_group_id = "existing-scaling-group-id"
 | sg_name_regex  | A default filter applied to retrieve existing security groups by name regex. If not set, `filter_with_name_regex` will be used | string  | ""  | no  |
 | sg_tags  | A default filter applied to retrieve existing security groups by tags. If not set, `filter_with_tags` will be used | map(string)  | {}  | no  |
 
-## Outputs
+## 出参
 
 | Name | Description |
 |------|-------------|
@@ -196,21 +195,21 @@ scaling_group_id = "existing-scaling-group-id"
 | this_autoscaling_lifecycle_hook_name | The name of the lifecycle hook |
 | this_autoscaling_lifecycle_hook_notification_arn | The notification arn of the lifecycle hook |
 
-Submit Issues
--------------
-If you have any problems when using this module, please opening a [provider issue](https://github.com/terraform-providers/terraform-provider-alicloud/issues/new) and let us know.
+提交问题
+-------
+如果在使用该 Terraform Module 的过程中有任何问题，可以直接创建一个 [Provider Issue](https://github.com/terraform-providers/terraform-provider-alicloud/issues/new)，我们将根据问题描述提供解决方案。
 
-**Note:** There does not recommend to open an issue on this repo.
+**注意:** 不建议在该 Module 仓库中直接提交 Issue。
 
-Authors
+作者
 ----
 Created and maintained by Tong Kangning(@TalentNing, xiaoxiaoerke@163.com) and He Guimin(@xiaozhu36, heguimin36@163.com)
 
-License
+许可
 ----
 Apache 2 Licensed. See LICENSE for full details.
 
-Reference
+参考
 ---------
 * [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)

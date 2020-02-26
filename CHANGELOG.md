@@ -1,4 +1,9 @@
 ## 1.6.0 (Unreleased)
+
+IMPROVEMENTS:
+
+- add the type of variables and README-CN.md [GH-12](https://github.com/terraform-alicloud-modules/terraform-alicloud-autoscaling/pull/12)
+
 ## 1.5.0 (January 9, 2020)
 
 IMPROVEMENTS:
