@@ -2,6 +2,8 @@ Alicloud Auto Scaling Terraform Module
 terraform-alicloud-autoscaling
 ---
 
+English | [简体中文](https://github.com/terraform-alicloud-modules/terraform-alicloud-autoscaling/blob/master/README-CN.md)
+
 Terraform moudle which create Auto Scaling resources on Alicloud.
 
 These types of resources are supported:
