@@ -203,7 +203,7 @@ scaling_group_id = "existing-scaling-group-id"
 
 作者
 ----
-Created and maintained by Tong Kangning(@TalentNing, xiaoxiaoerke@163.com) and He Guimin(@xiaozhu36, heguimin36@163.com)
+Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com)
 
 许可
 ----
