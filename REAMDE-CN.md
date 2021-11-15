@@ -11,7 +11,10 @@ Terraform模块用于在阿里云上创建自动缩放资源。
 
 ## Terraform 版本
 
-本 Module 要求使用 Terraform 0.12 和 阿里云 Provider 1.62.0+。
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.56.0
 
 ## 用法
 
@@ -200,6 +203,74 @@ scaling_group_id = "existing-scaling-group-id"
 如果在使用该 Terraform Module 的过程中有任何问题，可以直接创建一个 [Provider Issue](https://github.com/terraform-providers/terraform-provider-alicloud/issues/new)，我们将根据问题描述提供解决方案。
 
 **注意:** 不建议在该 Module 仓库中直接提交 Issue。
+
+## 注意事项
+本Module从版本v1.7.0开始已经移除掉如下的 provider 的显示设置：
+```hcl
+provider "alicloud" {
+  profile                 = var.profile != "" ? var.profile : null
+  region                  = var.region != "" ? var.region : null
+  skip_region_validation  = var.skip_region_validation
+}
+```
+
+如果你依然想在Module中使用这个 provider 配置，你可以在调用Module的时候，指定一个特定的版本，比如 1.6.0:
+
+```hcl
+module "autoscaling" {
+  source = "terraform-alicloud-modules/autoscaling/alicloud"
+  version     = "1.6.0"
+  region      = "cn-hangzhou"
+  profile     = "Your-Profile-Name"
+  scaling_group_name = "testAccEssScalingGroup"
+  min_size           = 0
+  max_size           = 1
+  vswitch_ids = [
+    "vsw-2ze0rxn9houkr2j00sfu0",
+  ]
+}
+```
+如果你想对正在使用中的Module升级到 1.7.0 或者更高的版本，那么你可以在模板中显示定义一个相同Region的provider：
+```hcl
+provider "alicloud" {
+  region  = "cn-hangzhou"
+  profile = "Your-Profile-Name"
+}
+module "autoscaling" {
+  source = "terraform-alicloud-modules/autoscaling/alicloud"
+  scaling_group_name = "testAccEssScalingGroup"
+  min_size           = 0
+  max_size           = 1
+  vswitch_ids = [
+    "vsw-2ze0rxn9houkr2j00sfu0",
+  ]
+}
+```
+或者，如果你是多Region部署，你可以利用 `alias` 定义多个 provider，并在Module中显示指定这个provider：
+
+```hcl
+provider "alicloud" {
+  region  = "cn-hangzhou"
+  profile = "Your-Profile-Name"
+  alias   = "hz"
+}
+module "autoscaling" {
+  source = "terraform-alicloud-modules/autoscaling/alicloud"
+  providers = {
+    alicloud = alicloud.hz
+  }
+  scaling_group_name = "testAccEssScalingGroup"
+  min_size           = 0
+  max_size           = 1
+  vswitch_ids = [
+    "vsw-2ze0rxn9houkr2j00sfu0",
+  ]
+}
+```
+
+定义完provider之后，运行命令 `terraform init` 和 `terraform apply` 来让这个provider生效即可。
+
+更多provider的使用细节，请移步[How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
 
 作者
 ----
