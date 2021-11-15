@@ -12,7 +12,10 @@ These types of resources are supported:
 
 ## Terraform versions
 
-The Module requires Terraform 0.12 and Terraform Provider AliCloud 1.62.0+.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.56.0
 
 ## Usage
 
@@ -201,6 +204,77 @@ Submit Issues
 If you have any problems when using this module, please opening a [provider issue](https://github.com/terraform-providers/terraform-provider-alicloud/issues/new) and let us know.
 
 **Note:** There does not recommend to open an issue on this repo.
+
+## Notes
+From the version v1.7.0, the module has removed the following `provider` setting:
+
+```hcl
+provider "alicloud" {
+  profile                 = var.profile != "" ? var.profile : null
+  region                  = var.region != "" ? var.region : null
+  skip_region_validation  = var.skip_region_validation
+}
+```
+
+If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 1.6.0:
+
+```hcl
+module "autoscaling" {
+  source = "terraform-alicloud-modules/autoscaling/alicloud"
+  version     = "1.6.0"
+  region      = "cn-hangzhou"
+  profile     = "Your-Profile-Name"
+  scaling_group_name = "testAccEssScalingGroup"
+  min_size           = 0
+  max_size           = 1
+  vswitch_ids = [
+    "vsw-2ze0rxn9houkr2j00sfu0",
+  ]
+}
+```
+
+If you want to upgrade the module to 1.7.0 or higher in-place, you can define a provider which same region with
+previous region:
+
+```hcl
+provider "alicloud" {
+   region  = "cn-hangzhou"
+   profile = "Your-Profile-Name"
+}
+module "autoscaling" {
+  source = "terraform-alicloud-modules/autoscaling/alicloud"
+  scaling_group_name = "testAccEssScalingGroup"
+  min_size           = 0
+  max_size           = 1
+  vswitch_ids = [
+    "vsw-2ze0rxn9houkr2j00sfu0",
+  ]
+}
+```
+or specify an alias provider with a defined region to the module using `providers`:
+
+```hcl
+provider "alicloud" {
+  region  = "cn-hangzhou"
+  profile = "Your-Profile-Name"
+  alias   = "hz"
+}
+module "autoscaling" {
+  source = "terraform-alicloud-modules/autoscaling/alicloud"
+  providers = {
+    alicloud = alicloud.hz
+  }
+  scaling_group_name = "testAccEssScalingGroup"
+  min_size           = 0
+  max_size           = 1
+  vswitch_ids = [
+    "vsw-2ze0rxn9houkr2j00sfu0",
+  ]
+}
+```
+
+and then run `terraform init` and `terraform apply` to make the defined provider effect to the existing module state.
+More details see [How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
 
 Authors
 ----

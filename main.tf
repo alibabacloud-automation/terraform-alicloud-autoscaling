@@ -1,12 +1,3 @@
-// Profile configure
-provider "alicloud" {
-  profile                 = var.profile != "" ? var.profile : null
-  shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
-  region                  = var.region != "" ? var.region : null
-  skip_region_validation  = var.skip_region_validation
-  configuration_source    = "terraform-alicloud-modules/autoscaling"
-}
-
 // Autoscaling Group
 resource "alicloud_ess_scaling_group" "this" {
   count                                    = var.scaling_group_id == "" ? 1 : 0
