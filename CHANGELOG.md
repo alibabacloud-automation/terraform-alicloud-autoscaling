@@ -1,4 +1,10 @@
-## 1.7.0 (Unreleased)
+## 1.8.0 (Unreleased)
+## 1.7.0 (November 16, 2021)
+
+IMPROVEMENTS:
+
+- Removes the provider setting and improves the Readme [GH-14](https://github.com/terraform-alicloud-modules/terraform-alicloud-autoscaling/pull/14)
+
 ## 1.6.0 (February 26, 2020)
 
 IMPROVEMENTS:
