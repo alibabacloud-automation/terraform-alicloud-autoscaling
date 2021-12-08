@@ -5,6 +5,17 @@ provider "alicloud" {
 data "alicloud_zones" "default" {
   available_disk_category = "cloud_ssd"
 }
+data "alicloud_vpcs" "default" {
+  is_default = true
+}
+data "alicloud_vswitches" "default" {
+  is_default = true
+  vpc_id = "${data.alicloud_vpcs.default.ids.0}"
+}
+
+data "alicloud_security_groups" "default" {
+  vpc_id = "${data.alicloud_vpcs.default.ids.0}"
+}
 
 data "alicloud_images" "ecs_image" {
   most_recent = true
@@ -17,6 +28,10 @@ data "alicloud_instance_types" "default" {
   memory_size       = 2
 }
 
+data "alicloud_db_instances" "default" {
+  status     = "Running"
+}
+
 // Autoscaling group and Autoscaling configuration
 module "example" {
   source = "../../"
@@ -26,14 +41,8 @@ module "example" {
   min_size           = 0
   max_size           = 1
 
-  vswitch_ids = [
-    "vsw-2ze0rxn9hou123456",
-  ]
-
-  db_instance_ids = [
-    "rm-2zessj0r123456",
-  ]
-
+  db_instance_ids = data.alicloud_db_instances.default.ids
+  vswitch_ids = data.alicloud_vswitches.default.ids
   loadbalancer_ids = [
     "lb-2zeur05gfsge6123456",
   ]
@@ -41,7 +50,7 @@ module "example" {
   // Autoscaling Configuration
   image_id                   = data.alicloud_images.ecs_image.images[0].id
   instance_type              = data.alicloud_instance_types.default.instance_types[0].id
-  security_group_id          = "sg-2ze0zg123456"
+  security_group_id          = data.alicloud_security_groups.default.ids.0
   scaling_configuration_name = "testAccEssScalingConfiguration"
   internet_max_bandwidth_out = "1"
   instance_name              = "testAccEss"

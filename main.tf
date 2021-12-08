@@ -8,7 +8,7 @@ resource "alicloud_ess_scaling_group" "this" {
   vswitch_ids                              = local.vswitch_ids
   removal_policies                         = var.removal_policies
   db_instance_ids                          = local.rds_instance_ids
-  loadbalancer_ids                         = local.slb_instance_ids
+#  loadbalancer_ids                         = local.slb_instance_ids
   multi_az_policy                          = var.multi_az_policy
   on_demand_base_capacity                  = var.on_demand_base_capacity
   on_demand_percentage_above_base_capacity = var.on_demand_percentage_above_base_capacity
