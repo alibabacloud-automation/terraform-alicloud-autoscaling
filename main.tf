@@ -1,9 +1,9 @@
 // Autoscaling Group
 resource "alicloud_ess_scaling_group" "this" {
-  count                                    = var.scaling_group_id == "" ? 1 : 0
+  count                                    = var.create_scaling_group ? 1 : 0
   scaling_group_name                       = local.scaling_group_name
-  max_size                                 = var.max_size
   min_size                                 = var.min_size
+  max_size                                 = var.max_size
   default_cooldown                         = var.default_cooldown
   vswitch_ids                              = local.vswitch_ids
   removal_policies                         = var.removal_policies
@@ -37,7 +37,7 @@ resource "alicloud_ess_scaling_configuration" "this" {
   role_name                  = var.role_name
   force_delete               = var.force_delete
   password_inherit           = var.password_inherit
-  password                   = var.password_inherit == true ? "" : var.password
+  password                   = var.password_inherit ? "" : var.password
   kms_encrypted_password     = local.kms_encrypted_password
   kms_encryption_context     = local.kms_encrypted_password == "" ? null : length(var.kms_encryption_context) > 0 ? var.kms_encryption_context : null
   tags                       = var.tags

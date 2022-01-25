@@ -1,9 +1,24 @@
-.idea/
-terraform.tfstate
-terraform.tfstate.backup
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.terraform.*
+
+# Module directory
 .terraform/
-crash.log
-terraform.tfstate
-terraform.tfstate.backup
+
+# terraform log
+*.log
+
+# auto-generated key pair file
+*.pem
+
+# tools files
+.DS_Store
+.idea
+
+# others
 *.bak
-terraform.log
+*.bk
+**/.terraform/*
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
