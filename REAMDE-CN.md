@@ -13,8 +13,8 @@ Terraform模块用于在阿里云上创建自动缩放资源。
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
-| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.62.0
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.62.0 |
 
 ## 用法
 
@@ -54,7 +54,7 @@ module "example" {
 ```
 
 ## 注意事项
-本Module从版本v1.7.0开始已经移除掉如下的 provider 的显示设置：
+本Module从版本v1.7.0开始已经移除掉如下的 provider 的显式设置：
 ```hcl
 provider "alicloud" {
   profile                 = var.profile != "" ? var.profile : null
@@ -83,7 +83,7 @@ module "autoscaling" {
 }
 ```
 
-如果你想对正在使用中的Module升级到 1.7.0 或者更高的版本，那么你可以在模板中显示定义一个相同Region的provider：
+如果你想对正在使用中的Module升级到 1.7.0 或者更高的版本，那么你可以在模板中显式定义一个相同Region的provider：
 ```hcl
 provider "alicloud" {
   region  = "cn-hangzhou"
@@ -99,7 +99,7 @@ module "autoscaling" {
   ]
 }
 ```
-或者，如果你是多Region部署，你可以利用 `alias` 定义多个 provider，并在Module中显示指定这个provider：
+或者，如果你是多Region部署，你可以利用 `alias` 定义多个 provider，并在Module中显式指定这个provider：
 
 ```hcl
 provider "alicloud" {
