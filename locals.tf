@@ -22,12 +22,13 @@ locals {
   sg_name_regex                   = var.sg_name_regex != "" ? var.sg_name_regex : var.filter_with_name_regex
   sg_tags                         = length(var.sg_tags) > 0 ? var.sg_tags : var.filter_with_tags
   security_group_ids              = var.security_group_id != "" ? [var.security_group_id] : length(var.security_group_ids) > 0 ? var.security_group_ids : local.sg_name_regex != "" || length(local.sg_tags) > 0 ? data.alicloud_security_groups.this.ids : null
-  zone_id                         = length(var.vswitch_ids) > 0 ? data.alicloud_vswitches.this.vswitches.0.zone_id : data.alicloud_zones.this.ids.0
+  zone_id                         = length(data.alicloud_vswitches.this.vswitches) > 0 ? data.alicloud_vswitches.this.vswitches.0.zone_id : data.alicloud_zones.this.ids.0
   scaling_group_id                = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this.0.id : var.scaling_group_id
   kms_encrypted_password          = var.password_inherit || var.password != "" ? "" : var.kms_encrypted_password
 }
 
-resource "random_uuid" "this" {}
+resource "random_uuid" "this" {
+}
 
 data "alicloud_regions" "this" {
   current = true
