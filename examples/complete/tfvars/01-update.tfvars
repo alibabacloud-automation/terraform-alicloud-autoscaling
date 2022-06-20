@@ -24,7 +24,7 @@ instance_storage  = "50"
 monitoring_period = "5"
 
 #alicloud_slb_load_balancer
-load_balancer_spec = "slb.s3.small"
+load_balancer_spec = "slb.s2.medium"
 
 #alicloud_slb_listener
 bandwidth = 20

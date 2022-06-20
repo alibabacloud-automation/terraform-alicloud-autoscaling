@@ -65,7 +65,7 @@ variable "bandwidth" {
 variable "scaling_group_name" {
   description = "The name for autoscaling group. Default to a random string prefixed with `terraform-ess-group-`."
   type        = string
-  default     = "tf-scaling-group-name"
+  default     = "tf-testacc-scaling-group-name"
 }
 
 variable "min_size" {
