@@ -3,15 +3,15 @@ data "alicloud_db_zones" "default" {
   engine_version = "5.6"
 }
 
+data "alicloud_db_instance_classes" "default" {
+  engine         = "MySQL"
+  engine_version = "5.6"
+}
+
 data "alicloud_images" "default" {
   most_recent = true
   owners      = "system"
   name_regex  = "^ubuntu_18.*64"
-}
-
-data "alicloud_db_instance_classes" "default" {
-  engine         = "MySQL"
-  engine_version = "5.6"
 }
 
 data "alicloud_instance_types" "default" {
@@ -186,7 +186,7 @@ module "scaling_configuration" {
   image_id           = data.alicloud_images.default.images.0.id
   image_owners       = "system"
   image_name_regex   = "^ubuntu_18.*64"
-  instance_types     = data.alicloud_instance_types.default.ids
+  instance_types     = [data.alicloud_instance_types.default.ids.0]
   cpu_core_count     = 2
   memory_size        = 4
   security_group_ids = [module.security_group.this_security_group_id]
