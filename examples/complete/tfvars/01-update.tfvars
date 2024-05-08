@@ -31,8 +31,6 @@ bandwidth = 20
 
 #alicloud_ess_scaling_group
 scaling_group_name                       = "update-tf-scaling-group-name"
-min_size                                 = 2
-max_size                                 = 4
 default_cooldown                         = 320
 removal_policies                         = ["OldestInstance", "NewestInstance"]
 on_demand_base_capacity                  = 10
