@@ -24,7 +24,7 @@ resource "alicloud_db_instance" "default" {
   engine               = "MySQL"
   engine_version       = "5.6"
   vswitch_id           = module.vpc.this_vswitch_ids[0]
-  instance_type        = data.alicloud_db_instance_classes.default.instance_classes.0.instance_class
+  instance_type        = data.alicloud_db_instance_classes.default.instance_classes.1.instance_class
   instance_storage     = var.instance_storage
   instance_charge_type = var.instance_charge_type
   monitoring_period    = var.monitoring_period
