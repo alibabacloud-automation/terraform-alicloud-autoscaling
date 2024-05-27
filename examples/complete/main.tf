@@ -104,11 +104,11 @@ resource "alicloud_slb_rule" "default" {
 }
 
 resource "alicloud_mns_topic" "default" {
-  name = "tf-topic-name-20220216"
+  name = "tf-topic-name-${random_integer.default.result}"
 }
 
 resource "alicloud_mns_queue" "default" {
-  name = "tf-queue-name-20220216"
+  name = "tf-queue-name-${random_integer.default.result}"
 }
 
 module "vpc" {
