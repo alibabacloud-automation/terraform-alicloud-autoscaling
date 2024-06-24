@@ -48,6 +48,8 @@ resource "alicloud_ess_scaling_configuration" "this" {
       snapshot_id          = lookup(data_disk.value, "snapshot_id", null)
       size                 = lookup(data_disk.value, "size", null)
       category             = lookup(data_disk.value, "category", null)
+      encrypted            = lookup(data_disk.value, "encrypted", null)
+      kms_key_id           = lookup(data_disk.value, "kms_key_id", null)
     }
   }
 }
