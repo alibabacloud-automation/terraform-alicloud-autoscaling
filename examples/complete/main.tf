@@ -143,7 +143,7 @@ module "scaling_group" {
   #alicloud_ess_scaling_group
   create_scaling_group = true
 
-  scaling_group_name = var.scaling_group_name
+  scaling_group_name = "${var.scaling_group_name}-${random_integer.default.result}"
   min_size           = var.min_size
   max_size           = var.max_size
   default_cooldown   = var.default_cooldown
