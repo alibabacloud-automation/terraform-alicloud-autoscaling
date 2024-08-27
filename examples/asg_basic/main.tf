@@ -82,11 +82,16 @@ module "ecs_instance" {
   security_group_ids = [module.security_group.this_security_group_id]
 }
 
+resource "random_integer" "default" {
+  min = 10000
+  max = 99999
+}
+
 module "example" {
   source = "../../"
 
   #alicloud_ess_scaling_group
-  scaling_group_name = var.scaling_group_name
+  scaling_group_name = "${var.scaling_group_name}-${random_integer.default.result}"
   min_size           = var.min_size
   max_size           = var.max_size
   vswitch_ids        = module.vpc.this_vswitch_ids

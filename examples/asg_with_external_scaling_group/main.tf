@@ -84,13 +84,18 @@ module "ecs_instance" {
   security_group_ids = [module.security_group.this_security_group_id]
 }
 
+resource "random_integer" "default" {
+  min = 10000
+  max = 99999
+}
+
 module "scaling_group" {
   source = "../.."
 
   #alicloud_ess_scaling_group
   create_scaling_group = true
 
-  scaling_group_name = var.scaling_group_name
+  scaling_group_name = "${var.scaling_group_name}-${random_integer.default.result}"
   min_size           = var.min_size
   max_size           = var.max_size
   default_cooldown   = var.default_cooldown
