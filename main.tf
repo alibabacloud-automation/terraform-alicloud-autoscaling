@@ -44,10 +44,16 @@ resource "alicloud_ess_scaling_configuration" "this" {
   dynamic "data_disk" {
     for_each = var.data_disks
     content {
-      delete_with_instance = lookup(data_disk.value, "delete_with_instance", null)
-      snapshot_id          = lookup(data_disk.value, "snapshot_id", null)
-      size                 = lookup(data_disk.value, "size", null)
-      category             = lookup(data_disk.value, "category", null)
+      delete_with_instance    = lookup(data_disk.value, "delete_with_instance", null)
+      snapshot_id             = lookup(data_disk.value, "snapshot_id", null)
+      size                    = lookup(data_disk.value, "size", null)
+      category                = lookup(data_disk.value, "category", null)
+      encrypted               = lookup(data_disk.value, "encrypted", null)
+      kms_key_id              = lookup(data_disk.value, "kms_key_id", null)
+      name                    = lookup(data_disk.value, "name", null)
+      description             = lookup(data_disk.value, "description", null)
+      auto_snapshot_policy_id = lookup(data_disk.value, "auto_snapshot_policy_id", null)
+      performance_level       = lookup(data_disk.value, "performance_level", null)
     }
   }
 }
