@@ -1,4 +1,9 @@
-## 1.8.0 (Unreleased)
+## 1.9.0 (Unreleased)
+## 1.8.0 (September 02, 2024)
+
+- module: support data disk encrypted [GH-25](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/pull/25)
+
+
 ## 1.7.0 (November 16, 2021)
 
 IMPROVEMENTS:
