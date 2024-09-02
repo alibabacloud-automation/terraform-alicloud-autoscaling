@@ -177,7 +177,7 @@ variable "user_data" {
 variable "force_delete" {
   description = "The last scaling configuration will be deleted forcibly with deleting its scaling group"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "password_inherit" {

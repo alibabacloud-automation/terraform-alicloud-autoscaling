@@ -224,6 +224,7 @@ module "scaling_configuration" {
     snapshot_id          = alicloud_ecs_snapshot.default.id
     size                 = 30
     category             = "cloud_efficiency"
+    encrypted            = true
   }]
 
   #alicloud_ess_lifecycle_hook
