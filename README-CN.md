@@ -1,20 +1,20 @@
-Alicloud Auto Scaling Terraform Module  
-terraform-alicloud-autoscaling
----
+ terraform-alicloud-autoscaling
+-------------------------------
 
-Terraform module which create Auto Scaling resources on Alicloud.
+Terraform模块用于在阿里云上创建自动缩放资源。
 
-These types of resources are supported:
+支持以下类型的资源：
 
 * [Auto Scaling Group](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_group.html)
 * [Auto Scaling Configuration](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html)
 * [Auto Scaling Lifecycle Hook](https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_lifecycle_hook.html)
 
-## Usage
+## 用法
 
 ```hcl
 module "example" {
   source = "terraform-alicloud-modules/autoscaling/alicloud"
+
   // Autoscaling Group
   scaling_group_name = "testAccEssScalingGroup"
   min_size           = 0
@@ -45,9 +45,9 @@ module "example" {
   }]
 }
 ```
-## Notes
-From the version v1.7.0, the module has removed the following `provider` setting:
 
+## 注意事项
+本Module从版本v1.7.0开始已经移除掉如下的 provider 的显式设置：
 ```hcl
 provider "alicloud" {
   profile                 = var.profile != "" ? var.profile : null
@@ -58,7 +58,7 @@ provider "alicloud" {
 }
 ```
 
-If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 1.6.0:
+如果你依然想在Module中使用这个 provider 配置，你可以在调用Module的时候，指定一个特定的版本，比如 1.6.0:
 
 ```hcl
 module "autoscaling" {
@@ -76,13 +76,11 @@ module "autoscaling" {
 }
 ```
 
-If you want to upgrade the module to 1.7.0 or higher in-place, you can define a provider which same region with
-previous region:
-
+如果你想对正在使用中的Module升级到 1.7.0 或者更高的版本，那么你可以在模板中显式定义一个相同Region的provider：
 ```hcl
 provider "alicloud" {
-   region  = "cn-hangzhou"
-   profile = "Your-Profile-Name"
+  region  = "cn-hangzhou"
+  profile = "Your-Profile-Name"
 }
 module "autoscaling" {
   source = "terraform-alicloud-modules/autoscaling/alicloud"
@@ -94,7 +92,7 @@ module "autoscaling" {
   ]
 }
 ```
-or specify an alias provider with a defined region to the module using `providers`:
+或者，如果你是多Region部署，你可以利用 `alias` 定义多个 provider，并在Module中显式指定这个provider：
 
 ```hcl
 provider "alicloud" {
@@ -116,14 +114,13 @@ module "autoscaling" {
 }
 ```
 
-and then run `terraform init` and `terraform apply` to make the defined provider effect to the existing module state.
-More details see [How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
+定义完provider之后，运行命令 `terraform init` 和 `terraform apply` 来让这个provider生效即可。
 
-## Conditional creation
+更多provider的使用细节，请移步[How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
 
-This moudle can create both Auto Scaling group(ASG) and Auto Scaling configuration(ASC), it 
-is possible to use external scaling group only if you specify `scaling_group_id` parameter or
-use filter to get othere resources like security groups, load balancers and son on automatically.
+## 条件创建
+
+这个模型可以创建自动缩放组 (ASG) 和自动缩放配置 (ASC)，它仅当您指定 'scaling_group_id' 参数或使用过滤器自动获取安全组、负载平衡器等其他资源。
 
 1. To create ASC, but not ASG:
 ```hcl
@@ -174,7 +171,6 @@ scaling_group_id = "existing-scaling-group-id"
   lifecycle_hook_name = "ess-hook"
   mns_topic_name = alicloud_mns_topic.this.id
 ```
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -305,21 +301,21 @@ No modules.
 | <a name="output_this_autoscaling_lifecycle_hook_notification_arn"></a> [this\_autoscaling\_lifecycle\_hook\_notification\_arn](#output\_this\_autoscaling\_lifecycle\_hook\_notification\_arn) | The notification arn of the lifecycle hook |
 <!-- END_TF_DOCS -->
 
-Submit Issues
--------------
-If you have any problems when using this module, please opening a [provider issue](https://github.com/terraform-providers/terraform-provider-alicloud/issues/new) and let us know.
+提交问题
+-------
+如果在使用该 Terraform Module 的过程中有任何问题，可以直接创建一个 [Provider Issue](https://github.com/terraform-providers/terraform-provider-alicloud/issues/new)，我们将根据问题描述提供解决方案。
 
-**Note:** There does not recommend to open an issue on this repo.
+**注意:** 不建议在该 Module 仓库中直接提交 Issue。
 
-Authors
+作者
 ----
 Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com)
 
-License
+许可
 ----
 Apache 2 Licensed. See LICENSE for full details.
 
-Reference
+参考
 ---------
 * [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)

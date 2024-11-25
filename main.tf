@@ -1,4 +1,4 @@
-// Autoscaling Group
+# Autoscaling Group
 resource "alicloud_ess_scaling_group" "this" {
   count                                    = var.create_scaling_group ? 1 : 0
   scaling_group_name                       = local.scaling_group_name
@@ -16,12 +16,12 @@ resource "alicloud_ess_scaling_group" "this" {
   spot_instance_remedy                     = var.spot_instance_remedy
 }
 
-// Autoscaling configuration
+# Autoscaling configuration
 resource "alicloud_ess_scaling_configuration" "this" {
   count                      = var.create_scaling_configuration ? 1 : 0
   scaling_group_id           = local.scaling_group_id
-  image_id                   = var.image_id != "" ? var.image_id : data.alicloud_images.this.ids.0
-  instance_types             = length(var.instance_types) > 0 ? var.instance_types : var.instance_type != "" ? [var.instance_type] : [data.alicloud_instance_types.this.ids.0]
+  image_id                   = var.image_id != "" ? var.image_id : data.alicloud_images.this.ids[0]
+  instance_types             = length(var.instance_types) > 0 ? var.instance_types : var.instance_type != "" ? [var.instance_type] : [data.alicloud_instance_types.this.ids[0]]
   security_group_ids         = local.security_group_ids
   instance_name              = local.scaling_instance_name
   scaling_configuration_name = local.scaling_configuration_name
@@ -60,7 +60,7 @@ resource "alicloud_ess_scaling_configuration" "this" {
 
 resource "alicloud_ess_lifecycle_hook" "this" {
   count                 = var.create_lifecycle_hook ? 1 : 0
-  scaling_group_id      = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this.0.id : var.scaling_group_id
+  scaling_group_id      = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this[0].id : var.scaling_group_id
   name                  = local.lifecycle_hook_name
   lifecycle_transition  = var.lifecycle_transition
   heartbeat_timeout     = var.heartbeat_timeout

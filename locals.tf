@@ -9,7 +9,7 @@ locals {
   lifecycle_hook_name             = var.lifecycle_hook_name != "" ? var.lifecycle_hook_name : local.default_ess_lifecycle_hook_name
   mns_arn_name                    = var.mns_topic_name != "" ? var.mns_topic_name : var.mns_queue_name != "" ? var.mns_queue_name : ""
   mns_arn_type                    = var.mns_topic_name != "" ? "topic" : var.mns_queue_name != "" ? "queue" : ""
-  notification_arn                = "acs:mns:${data.alicloud_regions.this.regions.0.id}:${data.alicloud_account.this.id}:${local.mns_arn_type}/${local.mns_arn_name}"
+  notification_arn                = "acs:mns:${data.alicloud_regions.this.regions[0].id}:${data.alicloud_account.this.id}:${local.mns_arn_type}/${local.mns_arn_name}"
   slb_name_regex                  = var.slb_name_regex != "" ? var.slb_name_regex : var.filter_with_name_regex
   slb_tags                        = length(var.slb_tags) > 0 ? var.slb_tags : var.filter_with_tags
   slb_instance_ids                = length(var.loadbalancer_ids) > 0 ? var.loadbalancer_ids : local.slb_name_regex != "" || length(local.slb_tags) > 0 ? data.alicloud_slbs.this.ids : null
@@ -22,8 +22,8 @@ locals {
   sg_name_regex                   = var.sg_name_regex != "" ? var.sg_name_regex : var.filter_with_name_regex
   sg_tags                         = length(var.sg_tags) > 0 ? var.sg_tags : var.filter_with_tags
   security_group_ids              = var.security_group_id != "" ? [var.security_group_id] : length(var.security_group_ids) > 0 ? var.security_group_ids : local.sg_name_regex != "" || length(local.sg_tags) > 0 ? data.alicloud_security_groups.this.ids : null
-  zone_id                         = length(data.alicloud_vswitches.this.vswitches) > 0 ? data.alicloud_vswitches.this.vswitches.0.zone_id : data.alicloud_zones.this.ids.0
-  scaling_group_id                = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this.0.id : var.scaling_group_id
+  zone_id                         = length(data.alicloud_vswitches.this.vswitches) > 0 ? data.alicloud_vswitches.this.vswitches[0].zone_id : data.alicloud_zones.this.ids[0]
+  scaling_group_id                = var.scaling_group_id == "" ? alicloud_ess_scaling_group.this[0].id : var.scaling_group_id
   kms_encrypted_password          = var.password_inherit || var.password != "" ? "" : var.kms_encrypted_password
 }
 
