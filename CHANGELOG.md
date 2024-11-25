@@ -1,4 +1,8 @@
-## 1.9.0 (Unreleased)
+## 2.1.0 (Unreleased)
+## 2.0.0 (November 25, 2024)
+
+- Module: remove deprecated attributes; examples: improve the examples [GH-26](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/pull/26)
+
 ## 1.8.0 (September 02, 2024)
 
 - module: support data disk encrypted [GH-25](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/pull/25)
