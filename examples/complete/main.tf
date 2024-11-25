@@ -4,7 +4,7 @@ data "alicloud_db_zones" "default" {
 }
 
 data "alicloud_db_instance_classes" "default" {
-  zone_id        = data.alicloud_db_zones.default.ids.1
+  zone_id        = data.alicloud_db_zones.default.ids[1]
   engine         = "MySQL"
   engine_version = "5.6"
 }
@@ -18,7 +18,7 @@ data "alicloud_images" "default" {
 data "alicloud_instance_types" "default" {
   cpu_core_count    = 2
   memory_size       = 4
-  availability_zone = data.alicloud_db_zones.default.zones.1.id
+  availability_zone = data.alicloud_db_zones.default.zones[1].id
 }
 
 resource "random_integer" "default" {
@@ -50,7 +50,7 @@ resource "alicloud_kms_ciphertext" "kms" {
 }
 
 resource "alicloud_ecs_disk" "default" {
-  zone_id = data.alicloud_db_zones.default.zones.1.id
+  zone_id = data.alicloud_db_zones.default.zones[1].id
   size    = var.system_disk_size
 }
 
@@ -69,7 +69,7 @@ resource "alicloud_db_instance" "default" {
   engine               = "MySQL"
   engine_version       = "5.6"
   vswitch_id           = module.vpc.this_vswitch_ids[0]
-  instance_type        = data.alicloud_db_instance_classes.default.instance_classes.1.instance_class
+  instance_type        = data.alicloud_db_instance_classes.default.instance_classes[1].instance_class
   instance_storage     = var.instance_storage
   instance_charge_type = var.instance_charge_type
   monitoring_period    = var.monitoring_period
@@ -112,27 +112,33 @@ resource "alicloud_mns_queue" "default" {
 }
 
 module "vpc" {
-  source             = "alibaba/vpc/alicloud"
+  source  = "alibaba/vpc/alicloud"
+  version = "~>1.11.0"
+
   create             = true
   vpc_name           = var.scaling_group_name
   vpc_cidr           = "172.16.0.0/16"
   vswitch_name       = var.scaling_group_name
   vswitch_cidrs      = ["172.16.0.0/21"]
-  availability_zones = [data.alicloud_db_zones.default.zones.1.id]
+  availability_zones = [data.alicloud_db_zones.default.zones[1].id]
 }
 
 module "security_group" {
-  source = "alibaba/security-group/alicloud"
+  source  = "alibaba/security-group/alicloud"
+  version = "~>2.4.0"
+
   vpc_id = module.vpc.this_vpc_id
 }
 
 module "ecs_instance" {
-  source = "alibaba/ecs-instance/alicloud"
+  source  = "alibaba/ecs-instance/alicloud"
+  version = "~>2.12.0"
+
 
   number_of_instances = 1
 
-  instance_type      = data.alicloud_instance_types.default.instance_types.0.id
-  image_id           = data.alicloud_images.default.images.0.id
+  instance_type      = data.alicloud_instance_types.default.instance_types[0].id
+  image_id           = data.alicloud_images.default.images[0].id
   vswitch_ids        = module.vpc.this_vswitch_ids
   security_group_ids = [module.security_group.this_security_group_id]
 }
@@ -189,10 +195,10 @@ module "scaling_configuration" {
   create_scaling_configuration = true
   scaling_group_id             = module.scaling_group.this_autoscaling_group_id
 
-  image_id           = data.alicloud_images.default.images.0.id
+  image_id           = data.alicloud_images.default.images[0].id
   image_owners       = "system"
   image_name_regex   = "^ubuntu_18.*64"
-  instance_types     = [data.alicloud_instance_types.default.ids.0]
+  instance_types     = [data.alicloud_instance_types.default.ids[0]]
   cpu_core_count     = 2
   memory_size        = 4
   security_group_ids = [module.security_group.this_security_group_id]
