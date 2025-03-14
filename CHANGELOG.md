@@ -1,4 +1,8 @@
 ## 2.1.0 (Unreleased)
+## 2.0.1 (March 14, 2025)
+
+- examples/asg_with_external_scaling_group: improve the examples [GH-27](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/pull/27)
+
 ## 2.0.0 (November 25, 2024)
 
 - Module: remove deprecated attributes; examples: improve the examples [GH-26](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/pull/26)
