@@ -1,3 +1,7 @@
+provider "alicloud" {
+  region = "ap-southeast-5"
+}
+
 data "alicloud_db_zones" "default" {
   engine         = "MySQL"
   engine_version = "5.6"
@@ -9,16 +13,16 @@ data "alicloud_db_instance_classes" "default" {
 }
 
 data "alicloud_images" "default" {
-  most_recent = true
-  owners      = "system"
-  name_regex  = "^ubuntu_18.*64"
+  instance_type = data.alicloud_instance_types.default.instance_types[0].id
+  most_recent   = true
+  owners        = "system"
 }
 
 data "alicloud_instance_types" "default" {
   cpu_core_count       = 2
   memory_size          = 8
   availability_zone    = data.alicloud_db_zones.default.zones[0].id
-  instance_type_family = "ecs.g6"
+  instance_type_family = "ecs.g9i"
 }
 
 resource "alicloud_db_instance" "default" {
@@ -85,10 +89,11 @@ module "ecs_instance" {
 
   number_of_instances = 1
 
-  instance_type      = data.alicloud_instance_types.default.instance_types[0].id
-  image_id           = data.alicloud_images.default.images[0].id
-  vswitch_ids        = module.vpc.this_vswitch_ids
-  security_group_ids = [module.security_group.this_security_group_id]
+  instance_type        = data.alicloud_instance_types.default.instance_types[0].id
+  image_id             = data.alicloud_images.default.images[0].id
+  vswitch_ids          = module.vpc.this_vswitch_ids
+  security_group_ids   = [module.security_group.this_security_group_id]
+  system_disk_category = "cloud_essd"
 }
 
 resource "random_integer" "default" {
@@ -150,6 +155,7 @@ module "example" {
   scaling_group_id             = module.scaling_group.this_autoscaling_group_id
   image_id                     = data.alicloud_images.default.images[0].id
   instance_type                = data.alicloud_instance_types.default.ids[0]
+  system_disk_category         = "cloud_essd"
   security_group_id            = module.security_group.this_security_group_id
   scaling_configuration_name   = var.scaling_configuration_name
   internet_max_bandwidth_in    = null

@@ -42,7 +42,6 @@ spot_instance_remedy                     = false
 scaling_configuration_name = "update-tf-scaling-configuration-name"
 internet_charge_type       = "PayByBandwidth"
 internet_max_bandwidth_out = 20
-system_disk_category       = "cloud_ssd"
 system_disk_size           = 60
 user_data                  = "update-tf-user-data"
 password_inherit           = true

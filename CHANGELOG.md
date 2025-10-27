@@ -1,4 +1,3 @@
-## 2.1.0 (Unreleased)
 ## 2.0.1 (March 14, 2025)
 
 - examples/asg_with_external_scaling_group: improve the examples [GH-27](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/pull/27)
