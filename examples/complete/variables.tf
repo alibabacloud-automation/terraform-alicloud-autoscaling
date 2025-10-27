@@ -147,7 +147,7 @@ variable "internet_max_bandwidth_out" {
 variable "system_disk_category" {
   description = "Category of the system disk"
   type        = string
-  default     = "cloud_efficiency"
+  default     = "cloud_essd"
 }
 
 variable "system_disk_size" {
