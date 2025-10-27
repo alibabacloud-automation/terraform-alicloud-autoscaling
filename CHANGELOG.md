@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v2.0.1...v2.0.2) (2025-10-27)
+
+
+### Bug Fixes
+
+* improve the examples ([2b45039](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/commit/2b45039931a14bddf01dbad7ae9114db7e527952))
+
 ## 2.0.1 (March 14, 2025)
 
 - examples/asg_with_external_scaling_group: improve the examples [GH-27](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/pull/27)
@@ -51,5 +58,3 @@ IMPROVEMENTS:
 IMPROVEMENTS:
 
 - supports getting credentials from profile
-
-
