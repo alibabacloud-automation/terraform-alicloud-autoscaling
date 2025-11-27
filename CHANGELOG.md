@@ -1,3 +1,5 @@
+## [2.0.3](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v2.0.2...v2.0.3) (2025-11-27)
+
 ## [2.0.2](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v2.0.1...v2.0.2) (2025-10-27)
 
 
