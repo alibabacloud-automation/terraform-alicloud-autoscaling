@@ -1,3 +1,16 @@
+## [3.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v2.0.3...v3.0.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add provider version constraint for aliyun/alicloud
+* add provider version constraint for aliyun/alicloud
+
+### Features
+
+* add provider version constraint for aliyun/alicloud ([c4bda3b](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/commit/c4bda3bd9522996cb5b4948b585b4b803d4a6111))
+* add provider version constraint for aliyun/alicloud ([57b44fb](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/commit/57b44fb28be7470f19d4012e2a29346d1da5b7cc))
+
 ## [2.0.3](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v2.0.2...v2.0.3) (2025-11-27)
 
 ## [2.0.2](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v2.0.1...v2.0.2) (2025-10-27)
