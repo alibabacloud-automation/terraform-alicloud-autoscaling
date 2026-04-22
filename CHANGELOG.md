@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v3.0.0...v3.0.1) (2026-04-22)
+
+
+### Bug Fixes
+
+* update version of the dependency module ([448883b](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/commit/448883bfcb7620686d09a1c03a063c737d5cfe14))
+
 ## [3.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-autoscaling/compare/v2.0.3...v3.0.0) (2026-04-22)
 
 
