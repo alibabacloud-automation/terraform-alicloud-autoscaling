@@ -84,7 +84,7 @@ module "security_group" {
 
 module "ecs_instance" {
   source  = "alibaba/ecs-instance/alicloud"
-  version = "3.0.0"
+  version = "4.0.0"
 
 
   number_of_instances = 1
