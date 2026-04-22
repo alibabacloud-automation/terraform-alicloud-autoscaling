@@ -119,7 +119,7 @@ resource "alicloud_mns_queue" "default" {
 
 module "vpc" {
   source  = "alibaba/vpc/alicloud"
-  version = "~>1.11.0"
+  version = "2.0.0"
 
   create             = true
   vpc_name           = var.scaling_group_name
@@ -131,14 +131,14 @@ module "vpc" {
 
 module "security_group" {
   source  = "alibaba/security-group/alicloud"
-  version = "~>2.4.0"
+  version = "3.0.0"
 
   vpc_id = module.vpc.this_vpc_id
 }
 
 module "ecs_instance" {
   source  = "alibaba/ecs-instance/alicloud"
-  version = "~>2.12.0"
+  version = "3.0.0"
 
 
   number_of_instances = 1

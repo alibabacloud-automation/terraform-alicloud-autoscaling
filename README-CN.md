@@ -183,12 +183,13 @@ scaling_group_id = "existing-scaling-group-id"
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.200.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | n/a |
+| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | >= 1.200.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
@@ -199,19 +200,19 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [alicloud_ess_lifecycle_hook.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/ess_lifecycle_hook) | resource |
-| [alicloud_ess_scaling_configuration.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/ess_scaling_configuration) | resource |
-| [alicloud_ess_scaling_group.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/ess_scaling_group) | resource |
+| [alicloud_ess_lifecycle_hook.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/ess_lifecycle_hook) | resource |
+| [alicloud_ess_scaling_configuration.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/ess_scaling_configuration) | resource |
+| [alicloud_ess_scaling_group.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/ess_scaling_group) | resource |
 | [random_uuid.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
-| [alicloud_account.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/account) | data source |
-| [alicloud_db_instances.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/db_instances) | data source |
-| [alicloud_images.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/images) | data source |
-| [alicloud_instance_types.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/instance_types) | data source |
-| [alicloud_regions.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/regions) | data source |
-| [alicloud_security_groups.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/security_groups) | data source |
-| [alicloud_slbs.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/slbs) | data source |
-| [alicloud_vswitches.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/vswitches) | data source |
-| [alicloud_zones.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/zones) | data source |
+| [alicloud_account.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/account) | data source |
+| [alicloud_db_instances.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/db_instances) | data source |
+| [alicloud_images.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/images) | data source |
+| [alicloud_instance_types.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/instance_types) | data source |
+| [alicloud_regions.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/regions) | data source |
+| [alicloud_security_groups.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/security_groups) | data source |
+| [alicloud_slbs.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/slbs) | data source |
+| [alicloud_vswitches.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/vswitches) | data source |
+| [alicloud_zones.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/zones) | data source |
 
 ## Inputs
 
@@ -260,7 +261,7 @@ No modules.
 | <a name="input_password_inherit"></a> [password\_inherit](#input\_password\_inherit) | Specifies whether to use the password that is predefined in the image. If true, the `password` and `kms_encrypted_password` will be ignored. You must ensure that the selected image has a password configured. | `bool` | `false` | no |
 | <a name="input_rds_name_regex"></a> [rds\_name\_regex](#input\_rds\_name\_regex) | A default filter applied to retrieve existing rds instances by name regex. If not set, `filter_with_name_regex` will be used. | `string` | `""` | no |
 | <a name="input_rds_tags"></a> [rds\_tags](#input\_rds\_tags) | A default filter applied to retrieve existing rds instances by tags. If not set, `filter_with_tags` will be used. | `map(string)` | `{}` | no |
-| <a name="input_removal_policies"></a> [removal\_policies](#input\_removal\_policies) | RemovalPolicy is used to select the ECS instances you want to remove from the scaling group when multiple candidates for removal exist | `list(string)` | <pre>[<br>  "OldestScalingConfiguration",<br>  "OldestInstance"<br>]</pre> | no |
+| <a name="input_removal_policies"></a> [removal\_policies](#input\_removal\_policies) | RemovalPolicy is used to select the ECS instances you want to remove from the scaling group when multiple candidates for removal exist | `list(string)` | <pre>[<br/>  "OldestScalingConfiguration",<br/>  "OldestInstance"<br/>]</pre> | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | Instance RAM role name | `string` | `""` | no |
 | <a name="input_scaling_configuration_name"></a> [scaling\_configuration\_name](#input\_scaling\_configuration\_name) | Name for the autoscaling configuration. Default to a random string prefixed with `terraform-ess-configuration-`. | `string` | `""` | no |
 | <a name="input_scaling_group_id"></a> [scaling\_group\_id](#input\_scaling\_group\_id) | Specifying existing autoscaling group ID. If not set, a new one will be created named with `scaling_group_name`. | `string` | `""` | no |
